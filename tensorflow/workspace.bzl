@@ -703,11 +703,11 @@ def tf_workspace(path_prefix="", tf_repo_name=""):
   )
 
   native.new_http_archive(
-      name = "arm_compute",
+      name = "acl_archive",
       urls = [
           "https://github.com/ARM-software/ComputeLibrary/archive/v17.06.tar.gz",
       ],
       sha256 = "9262dcdfe41a3ae781727b6814075192bc11327f7447b16189093aa5bb263592",
       strip_prefix = "ComputeLibrary-17.06",
-      build_file = str(Label("//third_party:acl.BUILD"),
+      build_file = str(Label("//third_party/acl:acl.BUILD")),
   )
