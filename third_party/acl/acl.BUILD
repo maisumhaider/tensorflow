@@ -7,7 +7,7 @@ genrule(
 cc_library(
     name = "libarm_compute_objects",
     hdrs = [":arm_compute_version.embed"],
-    srcs = glob(["include/*.cpp", "src/**/*.cpp"]),
+    srcs = glob(["include/*.cpp", "src/**/*.cpp", "arm_compute/**/*.cpp"]),
     includes = ["include", "arm_compute", "."],
     copts = ["-Wno-deprecated-declarations",
              "-Wall", "-DARCH_ARM", "-Wextra", "-Wno-unused-parameter",
