@@ -1,7 +1,7 @@
 genrule(
     name = "generate_fake_compute_version",
     outs = [":arm_compute_version.embed"],
-    cmd = 'echo "\\"arm_compute_version=v17.06 Build options: {\'arch\': \'x86_64\', \'opencl\': \'0\', \'neon\': \'0\', \'debug\': \'1\', \'os\': \'linux\', \'Werror\': \'1\'} Git hash=db0e610fa90a4c7c534049792ee7fe143d46f72f\\" " > $@',
+    cmd = 'echo "\\"arm_compute_version=v17.06 Build options: {\'arch\': \'armv7a\', \'opencl\': \'1\', \'neon\': \'1\', \'debug\': \'0\', \'os\': \'linux\', \'Werror\': \'0\'} Git hash=db0e610fa90a4c7c534049792ee7fe143d46f72f\\" " > $@'
 )
 
 cc_library(
@@ -16,8 +16,8 @@ cc_library(
              "-std=gnu++11", "-Wno-vla", "-Woverloaded-virtual", "-Wctor-dtor-privacy",
              "-Wsign-promo", "-Weffc++", "-Wno-format-nonliteral", "-Wno-overlength-strings",
              "-Wno-strict-overflow", "-Wlogical-op", "-Wnoexcept", "-Wstrict-null-sentinel",
-             "-Wno-ignored-attributes", "-Werror", "-O0", "-g", "-gdwarf-2", "-m64",
-             "-D_GLIBCXX_USE_NANOSLEEP", "-DARM_COMPUTE_CPP_SCHEDULER=1",
+             "-Wno-ignored-attributes", "-march=armv7-a", "-mthumb", "-mfpu=neon", "-mfloat-abi=hard", "-O3", "-ftree-vectorize",
+             "-D_GLIBCXX_USE_NANOSLEEP", "-DARM_COMPUTE_CPP_SCHEDULER=1", "-fPIC",
              "-DARM_COMPUTE_DEBUG_ENABLED",  "-DARM_COMPUTE_ASSERTS_ENABLED"],
     visibility = ["//visibility:public"],
     linkstatic=1,
