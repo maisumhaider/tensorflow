@@ -2486,7 +2486,7 @@ tf_kernel_library(
         "//third_party/mkl:intel_binary_blob",
     ]) + if_cuda([
         "//tensorflow/core/platform/default/build_config:cublas_plugin",
-    ]),
+    ]) + ["//third_party/acl:acl", "@acl_archive//:acl_headers"],
 )
 
 tf_kernel_library(
@@ -5759,3 +5759,4 @@ filegroup(
     ),
     visibility = ["//tensorflow:__subpackages__"],
 )
+

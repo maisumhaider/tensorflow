@@ -28,11 +28,18 @@ cc_binary(
     linkopts = [
         "-lpthread",
         "-ldl",
-        "-m64",
+        "-fopenmp",
     ],
     linkshared = 1,
     deps = [
         ":libarm_compute_objects",
     ],
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "acl_headers",
+    srcs = glob(["**/*.h"]),
+    includes = [".", "include", "arm_compute"],
     visibility = ["//visibility:public"],
 )

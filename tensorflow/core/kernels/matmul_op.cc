@@ -30,6 +30,14 @@ limitations under the License.
 #include "tensorflow/core/platform/stream_executor.h"
 #endif  // GOOGLE_CUDA
 
+//#ifdef ARM_COMPUTE_LIBRARY
+#define ARM_COMPUTE_CL
+#include <core/Types.h>
+#include <runtime/CL/CLFunctions.h>
+#include <runtime/CL/CLScheduler.h>
+#include "utils/Utils.h"
+//#endif  // ARM_COMPUTE_LIBRARY
+
 namespace tensorflow {
 
 typedef Eigen::ThreadPoolDevice CPUDevice;
@@ -482,8 +490,16 @@ class MatMulOp : public OpKernel {
       return;
     }
 
+#if 1
+  arm_compute::CLGEMM arm_gemm;
+  arm_gemm.configure(a.flat<T>(), b.flat<T>(), nullptr, out.flat<T>(), 1.0f, 1.0f);
+  arm_gemm.run();
+
+
+#else
     LaunchMatMul<Device, T, USE_CUBLAS>::launch(
         ctx, a, b, dim_pair, &algorithms_, use_autotune_, out);
+#endif  // ARM_COMPUTE_LIBRARY
   }
 
  private:
@@ -583,3 +599,4 @@ TF_CALL_double(REGISTER_SYCL);
 
 #endif  // TENSORFLOW_USE_SYCL
 }  // namespace tensorflow
+
