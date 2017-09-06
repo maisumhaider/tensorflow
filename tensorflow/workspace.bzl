@@ -702,12 +702,9 @@ def tf_workspace(path_prefix="", tf_repo_name=""):
       strip_prefix = "bazel-toolchains-bccee4855c049d34bac481083b4c68e2fab8cc50",
   )
 
-  native.new_http_archive(
+  native.new_git_repository(
       name = "acl_archive",
-      urls = [
-          "https://github.com/ARM-software/ComputeLibrary/archive/v17.06.tar.gz",
-      ],
-      sha256 = "9262dcdfe41a3ae781727b6814075192bc11327f7447b16189093aa5bb263592",
-      strip_prefix = "ComputeLibrary-17.06",
+      remote = "https://github.com/lukeiwanski/ComputeLibrary",
+      commit = "aabb0f6769955e528da69ee96d66a31f89fea273",
       build_file = str(Label("//third_party/acl:acl.BUILD")),
   )

@@ -27,10 +27,14 @@ cc_library(
 cc_library(
     name = "syclrt",
     srcs = [
-        sycl_library_path("ComputeCpp")
+        sycl_library_path("ComputeCpp"),
+        sycl_library_path("arm_compute"),
+        sycl_library_path("arm_compute_core")
     ],
     data = [
-        sycl_library_path("ComputeCpp")
+        sycl_library_path("ComputeCpp"),
+        sycl_library_path("arm_compute"),
+        sycl_library_path("arm_compute_core")
     ],
     includes = ["include/"],
     linkstatic = 0,

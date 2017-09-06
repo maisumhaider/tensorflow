@@ -187,7 +187,9 @@ def _sycl_autoconf_imp(repository_ctx):
     })
 
     # symlink libraries
-    _check_lib(repository_ctx, computecpp_root+"/lib", "libComputeCpp.so" )
+    _check_lib(repository_ctx, computecpp_root+"/lib", "libComputeCpp.so")
+    _check_lib(repository_ctx, computecpp_root+"/lib", "libarm_compute_core.so")
+    _check_lib(repository_ctx, computecpp_root+"/lib", "libarm_compute.so")
     _symlink_dir(repository_ctx, computecpp_root + "/lib", "sycl/lib")
     _symlink_dir(repository_ctx, computecpp_root + "/include", "sycl/include")
     _symlink_dir(repository_ctx, computecpp_root + "/bin", "sycl/bin")
